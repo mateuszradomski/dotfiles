@@ -1,0 +1,32 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = "Mateusz Radomski"
+	email = "radomski.main@protonmail.com"
+[alias]
+	st = "status"
+	ft = "fetch"
+	ch = "checkout"
+	br = "branch"
+	cp = "cherry-pick"
+	cm = "commit"
+	cma = "commit --amend --no-edit"
+	cmaed = "commit --amend"
+	line = "log --oneline"
+    df = "diff"
+    dfs = "diff --staged"
+	cmwip = "commit -m \"WIP\""
+    sup = "submodule update --init --recursive"
+    
+	grepn = "grep -n"
+	greph = "grep --exclude-standard --no-index"
+[core]
+	commitGraph = true
+	excludesfile = ~/.gitignore_global
+[gc]
+	writeCommitGraph = true
+[push]
+	default = upstream

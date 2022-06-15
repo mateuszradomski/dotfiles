@@ -6,6 +6,8 @@ NEOVIM_BINARY_PATH="$HOME/.local/bin/nvim"
 BASE_URL="https://raw.githubusercontent.com/m-radomski/dotfiles/master"
 TMUX_CONF_PATH="$HOME/.tmux.conf"
 NVIM_INIT_PATH="$HOME/.config/nvim/init.vim"
+GITCONFIG_GLOB_PATH="$HOME/.gitconfig"
+GITIGNORE_GLOB_PATH="$HOME/.gitignore_global"
 
 YELLOW='\033[93m'
 GREEN='\033[92m'
@@ -14,6 +16,12 @@ RESET='\033[0m'
 # Download my dotfiles
 curl --proto '=https' --tlsv1.2 --silent --location $BASE_URL/.tmux.conf --create-dirs --output $TMUX_CONF_PATH
 curl --proto '=https' --tlsv1.2 --silent --location $BASE_URL/init.vim --create-dirs --output $NVIM_INIT_PATH
+
+if [ "$GIT" = "true" ]
+then
+    curl --proto '=https' --tlsv1.2 --silent --location $BASE_URL/.gitconfig --create-dirs --output $GITCONFIG_GLOB_PATH
+    curl --proto '=https' --tlsv1.2 --silent --location $BASE_URL/.gitignore_global --create-dirs --output $GITIGNORE_GLOB_PATH
+fi
 
 echo -e $YELLOW"Downloaded the config files"$RESET
 
