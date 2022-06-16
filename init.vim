@@ -47,7 +47,6 @@ lua <<EOF
   })
 EOF
 
-
 set grepprg=rg\ --vimgrep\ --smart-case
 
 let mapleader = " "
@@ -55,12 +54,18 @@ nnoremap <SPACE> <nop>
 
 nnoremap * *N
 nnoremap <leader>s :A<CR>
-nnoremap <leader>pv :Ex<CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-l> :Buffers<CR>
 nnoremap <C-P> :Files<CR>
 nnoremap <C-y> :UndotreeToggle<CR>
-nnoremap <C-g> :Git<CR>
+
+nnoremap <leader>pv :Ex<CR>
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gb :Git blame<CR>
+nnoremap <leader>gp :Git push<CR>
+nnoremap <leader>ga :Git fetch --all<CR>
+nnoremap <leader>grum :Git rebase upstream/master<CR>
+nnoremap <leader>grom :Git rebase origin/master<CR>
 
 noremap <leader><leader> <c-^>
 
@@ -81,3 +86,8 @@ end
 
 require'lspconfig'.clangd.setup{ on_attach=on_attach }
 EOF
+
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+augroup END
