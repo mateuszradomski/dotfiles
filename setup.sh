@@ -3,7 +3,7 @@
 NEOVIM_BINARY_URL="https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage"
 NEOVIM_BINARY_PATH="$HOME/.local/bin/nvim"
 
-BASE_URL="https://raw.githubusercontent.com/m-radomski/dotfiles/master"
+BASE_URL="https://raw.githubusercontent.com/mateuszradomski/dotfiles/master"
 TMUX_CONF_PATH="$HOME/.tmux.conf"
 NVIM_INIT_PATH="$HOME/.config/nvim/init.vim"
 GITCONFIG_GLOB_PATH="$HOME/.gitconfig"
