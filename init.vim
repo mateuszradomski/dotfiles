@@ -11,6 +11,7 @@ Plug 'luisiacc/gruvbox-baby'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'mbbill/undotree'
+Plug 'mateuszradomski/tableize.vim'
 call plug#end()
 
 colorscheme gruvbox-baby
@@ -59,6 +60,7 @@ nnoremap <C-l> :Buffers<CR>
 nnoremap <C-P> :Files<CR>
 nnoremap <C-y> :UndotreeToggle<CR>
 
+nnoremap <leader>t :Tableize<CR>
 nnoremap <leader>pv :Ex<CR>
 nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gb :Git blame<CR>
