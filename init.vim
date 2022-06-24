@@ -6,6 +6,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'vim-scripts/a.vim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'luisiacc/gruvbox-baby'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'mateuszradomski/tableize.vim'
@@ -24,21 +25,19 @@ set shiftwidth=4
 set expandtab
 set autoindent
 
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-lua require'treesitter-context'.setup { enable = true, max_lines = 0, patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, }, }
-
 set grepprg=rg\ --vimgrep\ --smart-case
 
 let mapleader = " "
 nnoremap <SPACE> <nop>
 
 nnoremap * *N
-nnoremap <leader>s :A<CR>
-nnoremap <C-p> :GFiles<CR>
-nnoremap <C-;> :Files<CR>
-nnoremap <C-l> :Buffers<CR>
+nnoremap <silent> <leader>s :A<CR>
+nnoremap <silent> <C-p> :GFiles<CR>
+nnoremap <silent> <C-y> :Files<CR>
+nnoremap <silent> <C-l> :Buffers<CR>
 
-nnoremap <leader>t :Tableize<CR>
+nnoremap <silent> <leader>t :Tableize<CR>
+vnoremap <Enter> :EasyAlign<CR>
 noremap <leader><leader> <c-^>
 
 lua << EOF
@@ -61,23 +60,47 @@ EOF
 
 lua << EOF
 local ls = require("luasnip")
+local s = ls.snippet
+local i = ls.insert_node
+local fmt = require("luasnip.extras.fmt").fmt
+local rep = require("luasnip.extras").rep
 
-ls.config.set_config {
-  history = true,
-  updateevents = "TextChanged,TextChangedI",
-}
+ls.config.set_config { history = true, updateevents = "TextChanged,TextChangedI" }
+vim.keymap.set({ "i", "s" }, "<c-g>", function() if ls.expand_or_jumpable() then ls.expand_or_jump() end end, { silent = true })
 
 ls.add_snippets("all", {
-    ls.parser.parse_snippet("ifd", "#ifdef $1\n\t$2\n#endif"),
-    ls.parser.parse_snippet("ifde", "#ifdef $1\n\t$2\n#else\n\t$3\n#endif"),
+    ls.parser.parse_snippet("todo", "TODO(radomski): "),
+    ls.parser.parse_snippet("note", "NOTE(radomski): "),
 })
 
-vim.keymap.set({ "i", "s" }, "<c-g>", function()
-  if ls.expand_or_jumpable() then
-    ls.expand_or_jump()
-  end
-end, { silent = true })
+ls.add_snippets("cpp", {
+    s("ifd", fmt("#ifdef {}\n\t{}\n#endif", { i(1, ""), i(2, "") })),
+    s("ifde", fmt("#ifdef {}\n\t{}\n#else\n\t{}\n#endif", { i(1, ""), i(2, ""), i(3, "") })),
+    s("for", fmt("for({} {} = 0; {} < {}; {}++)\n{{\n\t{}\n}}", { i(1, "int"), i(2, "i"), rep(2), i(3, ""), rep(2), i(4, "") })),
+    s("ife", fmt("if({}) {{\n\t{}\n}} else {{\n\t{}\n}}", { i(1, ""), i(2, ""), i(3, "") })),
+})
 EOF
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = { enable = true }, incremental_selection = { enable = true },
+    textobjects = {
+        swap = { enable = true,
+            swap_next = { ["<leader>w"] = "@parameter.inner" },
+            swap_previous = { ["<leader>q"] = "@parameter.inner" },
+        },
+
+        select = { enable = true, lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer", ["if"] = "@function.inner",
+                ["ab"] = "@block.outer", ["ib"] = "@block.inner",
+            },
+        },
+    },
+}
+EOF
+
+lua require'treesitter-context'.setup { enable = true, max_lines = 0, patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, }, }
 
 augroup highlight_yank
     autocmd!
