@@ -73,12 +73,20 @@ ls.add_snippets("all", {
     ls.parser.parse_snippet("note", "NOTE(radomski): "),
 })
 
-ls.add_snippets("cpp", {
+local csnip = {
     s("ifd", fmt("#ifdef {}\n\t{}\n#endif", { i(1, ""), i(2, "") })),
     s("ifde", fmt("#ifdef {}\n\t{}\n#else\n\t{}\n#endif", { i(1, ""), i(2, ""), i(3, "") })),
+    s("htop", fmt("#ifndef {}\n#define {}\n{}\n#endif", { i(1, ""), rep(1), i(2, "") })),
     s("for", fmt("for({} {} = 0; {} < {}; {}++)\n{{\n\t{}\n}}", { i(1, "int"), i(2, "i"), rep(2), i(3, ""), rep(2), i(4, "") })),
     s("ife", fmt("if({}) {{\n\t{}\n}} else {{\n\t{}\n}}", { i(1, ""), i(2, ""), i(3, "") })),
-})
+    s("tds", fmt("typedef struct {} \n{{\n\t{}\n}} {};", { i(1, ""), i(2, ""), rep(1) })),
+    s("pr", fmt("printf(\"{}\\n\");", { i(1, "") })),
+    s("prv", fmt("printf(\"{} = {}\\n\", {});", { i(1, ""), i(2, "%u"), rep(1) })),
+    s("main", fmt("#include <stdio.h>\n\nint main(int argc, char **argv)\n{{\n\t{}\n\n\treturn 0;\n}}", { i(1, "") })),
+}
+
+ls.add_snippets("cpp", csnip)
+ls.add_snippets("c", csnip)
 EOF
 
 lua << EOF
