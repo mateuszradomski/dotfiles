@@ -7,12 +7,12 @@ Plug 'vim-scripts/a.vim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'luisiacc/gruvbox-baby'
+Plug 'chrisduerr/vim-undead'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'mateuszradomski/tableize.vim'
 call plug#end()
 
-colorscheme gruvbox-baby
+colorscheme undead
 
 set noswapfile
 set cino+=(0
@@ -32,6 +32,8 @@ nnoremap <SPACE> <nop>
 
 nnoremap * *N
 nnoremap <silent> <leader>s :A<CR>
+nnoremap <silent> <leader>n :cn<CR>
+nnoremap <silent> <leader>p :cp<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <C-y> :Files<CR>
 nnoremap <silent> <C-l> :Buffers<CR>
