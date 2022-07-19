@@ -4,15 +4,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'neovim/nvim-lspconfig'
 Plug 'vim-scripts/a.vim'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'chrisduerr/vim-undead'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'mateuszradomski/tableize.vim'
 call plug#end()
-
-colorscheme undead
 
 set noswapfile
 set cino+=(0
@@ -56,9 +50,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gls', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
 
 end
-
-require'lspconfig'.clangd.setup{ on_attach = on_attach }
 EOF
+
+command! LspMe lua require'lspconfig'.clangd.setup{ on_attach = on_attach }
 
 lua << EOF
 local ls = require("luasnip")
@@ -90,27 +84,6 @@ local csnip = {
 ls.add_snippets("cpp", csnip)
 ls.add_snippets("c", csnip)
 EOF
-
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-    highlight = { enable = true }, incremental_selection = { enable = true },
-    textobjects = {
-        swap = { enable = true,
-            swap_next = { ["<leader>w"] = "@parameter.inner" },
-            swap_previous = { ["<leader>q"] = "@parameter.inner" },
-        },
-
-        select = { enable = true, lookahead = true,
-            keymaps = {
-                ["af"] = "@function.outer", ["if"] = "@function.inner",
-                ["ab"] = "@block.outer", ["ib"] = "@block.inner",
-            },
-        },
-    },
-}
-EOF
-
-lua require'treesitter-context'.setup { enable = true, max_lines = 0, patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, }, }
 
 augroup highlight_yank
     autocmd!
