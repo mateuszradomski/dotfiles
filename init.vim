@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'nathom/filetype.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
