@@ -4,9 +4,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'neovim/nvim-lspconfig'
-Plug 'vim-scripts/a.vim'
 Plug 'L3MON4D3/LuaSnip'
-Plug 'mateuszradomski/tableize.vim'
+Plug 'mateuszradomski/tableize.nvim'
+Plug 'mateuszradomski/alternate.nvim'
 call plug#end()
 
 set noswapfile
@@ -26,7 +26,7 @@ let mapleader = " "
 nnoremap <SPACE> <nop>
 
 nnoremap * *N
-nnoremap <silent> <leader>s :A<CR>
+nnoremap <silent> <leader>s :Alternate<CR>
 nnoremap <silent> <leader>n :cn<CR>
 nnoremap <silent> <leader>p :cp<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
