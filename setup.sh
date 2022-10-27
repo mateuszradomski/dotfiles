@@ -1,6 +1,6 @@
 #!/bin/sh
 
-NEOVIM_BINARY_URL="https://github.com/neovim/neovim/releases/download/v0.8.0/nvim.appimage"
+NEOVIM_BINARY_URL="https://github.com/neovim/neovim/releases/download/v0.7.0/nvim.appimage"
 NEOVIM_BINARY_PATH="$HOME/.local/bin/nvim"
 
 BASE_URL="https://raw.githubusercontent.com/mateuszradomski/dotfiles/master"
