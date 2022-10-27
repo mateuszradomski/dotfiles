@@ -7,6 +7,10 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'ziglang/zig.vim'
 Plug 'mateuszradomski/tableize.nvim'
 Plug 'mateuszradomski/alternate.nvim'
+Plug 'luisiacc/gruvbox-baby'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 call plug#end()
 
 set noswapfile
@@ -19,8 +23,9 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
-
 set grepprg=rg\ --vimgrep\ --smart-case
+
+colorscheme gruvbox-baby
 
 let mapleader = " "
 nnoremap <SPACE> <nop>
@@ -70,6 +75,27 @@ local csnip = {
 ls.add_snippets("cpp", csnip)
 ls.add_snippets("c", csnip)
 EOF
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    highlight = { enable = true }, incremental_selection = { enable = true },
+    textobjects = {
+        swap = { enable = true,
+            swap_next = { ["<leader>w"] = "@parameter.inner" },
+            swap_previous = { ["<leader>q"] = "@parameter.inner" },
+        },
+
+        select = { enable = true, lookahead = true,
+            keymaps = {
+                ["af"] = "@function.outer", ["if"] = "@function.inner",
+                ["ab"] = "@block.outer", ["ib"] = "@block.inner",
+            },
+        },
+    },
+}
+EOF
+
+lua require'treesitter-context'.setup { enable = true, max_lines = 0, patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, }, }
 
 augroup highlight_yank
     autocmd!
