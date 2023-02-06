@@ -6,12 +6,12 @@ Plug 'junegunn/vim-easy-align'
 Plug 'ziglang/zig.vim'
 Plug 'mateuszradomski/tableize.nvim'
 Plug 'mateuszradomski/alternate.nvim'
-Plug 'tomasr/molokai'
+Plug 'joshdick/onedark.vim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 call plug#end()
 
-colorscheme molokai
+colorscheme onedark
 
 set noswapfile
 set cino+=(0
