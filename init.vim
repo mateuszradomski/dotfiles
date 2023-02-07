@@ -6,7 +6,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'ziglang/zig.vim'
 Plug 'mateuszradomski/tableize.nvim'
 Plug 'mateuszradomski/alternate.nvim'
-Plug 'joshdick/onedark.vim'
+Plug 'mateuszradomski/untitled'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 call plug#end()
@@ -45,7 +45,7 @@ vnoremap <Enter> :EasyAlign<CR>
 
 lua << EOF
 require'nvim-treesitter.configs'.setup {
-    highlight = { enable = true }, incremental_selection = { enable = true },
+    incremental_selection = { enable = true },
 }
 EOF
 
