@@ -11,7 +11,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 call plug#end()
 
-colorscheme onedark
+colorscheme untitled
 
 set noswapfile
 set cino+=(0
