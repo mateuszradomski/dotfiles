@@ -9,6 +9,13 @@ Plug 'mateuszradomski/alternate.nvim'
 Plug 'mateuszradomski/untitled'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
+
 call plug#end()
 
 colorscheme untitled
@@ -50,6 +57,19 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 lua require'treesitter-context'.setup { enable = true, max_lines = 0, patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, }, }
+
+lua << EOF
+local lsp = require('lsp-zero').preset({})
+
+lsp.on_attach(function(client, bufnr)
+  lsp.default_keymaps({buffer = bufnr})
+end)
+
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.rust_analyzer.setup{}
+
+lsp.setup()
+EOF
 
 augroup highlight_yank
     autocmd!
