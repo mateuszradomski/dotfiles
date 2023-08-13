@@ -5,7 +5,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'ziglang/zig.vim'
 Plug 'mateuszradomski/tableize.nvim'
 Plug 'mateuszradomski/untitled'
-
+Plug 'nvim-tree/nvim-tree.lua'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -36,6 +36,8 @@ noremap <leader><leader> <c-^>
 
 nnoremap <silent> <leader>n :cn<CR>
 nnoremap <silent> <leader>p :cp<CR>
+nnoremap <silent> <leader>v :NvimTreeToggle<CR>
+nnoremap <silent> <leader>b :NvimTreeFindFile<CR>
 
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <C-y> :Files<CR>
@@ -60,6 +62,18 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.bo[args.buf].formatexpr = nil
     end,
 })
+EOF
+
+lua << EOF
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup()
 EOF
 
 augroup highlight_yank
