@@ -69,6 +69,13 @@ require'lspconfig'.tsserver.setup{}
 require'lspconfig'.rust_analyzer.setup{}
 
 lsp.setup()
+
+-- Disable this stupid LSP formatexpr that disallows me to do `gq`
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+    vim.bo[args.buf].formatexpr = nil
+    end,
+})
 EOF
 
 augroup highlight_yank
