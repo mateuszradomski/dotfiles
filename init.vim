@@ -42,6 +42,7 @@ nnoremap <silent> <leader>b :NvimTreeFindFile<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <C-y> :Files<CR>
 nnoremap <silent> <C-l> :Buffers<CR>
+nnoremap <silent> <leader>f :Rg<CR>
 nnoremap <silent> <leader>t :Tableize<CR>
 
 lua << EOF
