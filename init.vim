@@ -5,8 +5,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'ziglang/zig.vim'
 Plug 'mateuszradomski/tableize.nvim'
 Plug 'mateuszradomski/untitled'
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-context'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
@@ -43,14 +41,6 @@ nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <C-y> :Files<CR>
 nnoremap <silent> <C-l> :Buffers<CR>
 nnoremap <silent> <leader>t :Tableize<CR>
-
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-    incremental_selection = { enable = true },
-}
-EOF
-
-lua require'treesitter-context'.setup { enable = true, max_lines = 0, patterns = { default = { 'class', 'function', 'method', 'for', 'while', 'if', 'switch', 'case', }, }, }
 
 lua << EOF
 local lsp = require('lsp-zero').preset({})
