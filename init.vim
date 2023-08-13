@@ -37,8 +37,6 @@ nnoremap <SPACE> <nop>
 nnoremap * *N
 noremap <leader><leader> <c-^>
 
-nnoremap <leader>fs :grep
-nnoremap <silent> <leader>fw "ryiw:grep <C-R>r<CR>
 nnoremap <silent> <leader>n :cn<CR>
 nnoremap <silent> <leader>p :cp<CR>
 
