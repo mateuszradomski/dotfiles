@@ -4,7 +4,6 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'ziglang/zig.vim'
 Plug 'mateuszradomski/tableize.nvim'
-Plug 'mateuszradomski/alternate.nvim'
 Plug 'mateuszradomski/untitled'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
@@ -43,7 +42,6 @@ nnoremap <silent> <leader>p :cp<CR>
 nnoremap <silent> <C-p> :GFiles<CR>
 nnoremap <silent> <C-y> :Files<CR>
 nnoremap <silent> <C-l> :Buffers<CR>
-nnoremap <silent> <leader>s :Alternate<CR>
 nnoremap <silent> <leader>t :Tableize<CR>
 
 lua << EOF
