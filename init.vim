@@ -2,7 +2,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'nathom/filetype.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'junegunn/vim-easy-align'
 Plug 'ziglang/zig.vim'
 Plug 'mateuszradomski/tableize.nvim'
 Plug 'mateuszradomski/alternate.nvim'
@@ -48,7 +47,6 @@ nnoremap <silent> <C-y> :Files<CR>
 nnoremap <silent> <C-l> :Buffers<CR>
 nnoremap <silent> <leader>s :Alternate<CR>
 nnoremap <silent> <leader>t :Tableize<CR>
-vnoremap <Enter> :EasyAlign<CR>
 
 lua << EOF
 require'nvim-treesitter.configs'.setup {
