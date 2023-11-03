@@ -1,23 +1,22 @@
 call plug#begin('~/.vim/plugged')
-Plug 'nathom/filetype.nvim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'luisiacc/gruvbox-baby'
 Plug 'ziglang/zig.vim'
 Plug 'mateuszradomski/tableize.nvim'
-Plug 'mateuszradomski/untitled'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'VonHeikemen/lsp-zero.nvim', {'branch': 'v2.x'}
-
 call plug#end()
 
-colorscheme untitled
+colorscheme gruvbox-baby
 
 set noswapfile
 set cino+=(0
+set cino+=l1
 set relativenumber
 set incsearch
 set undofile
@@ -66,14 +65,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 EOF
 
 lua << EOF
--- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
--- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
-
--- empty setup using defaults
 require("nvim-tree").setup()
 EOF
 
